@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "427bc951-06ed-49fe-a251-f97669dcd975",
+		"name": "Apollo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30473179",
+		"_collection_link": "https://dark-comet-492046.postman.co/workspace/New-Team-Workspace~ad65db42-f927-4e8d-852a-87cd698dc830/collection/30473179-427bc951-06ed-49fe-a251-f97669dcd975?action=share&source=collection_link&creator=30473179"
+	},
+	"item": [
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "account",
+					"item": [
+						{
+							"name": "Gets",
+							"item": [
+								{
+									"name": "GetAccount",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{http}}{{port}}{{Account}}/1",
+											"host": [
+												"{{http}}{{port}}{{Account}}"
+											],
+											"path": [
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Posts",
+							"item": [
+								{
+									"name": "RegisterAccount",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"login\": \"Tets\",\r\n    \"emailCorp\": \"test@test.com\",\r\n    \"password\": \"123\",\r\n    \"dateStart\": \"20231103\",\r\n    \"client\": 2\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{http}}{{port}}{{Account}}",
+											"host": [
+												"{{http}}{{port}}{{Account}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "client",
+					"item": [
+						{
+							"name": "Gets",
+							"item": [
+								{
+									"name": "GetClient",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{http}}{{port}}{{Client}}",
+											"host": [
+												"{{http}}{{port}}{{Client}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetClientCnpj",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{http}}{{port}}{{Client}}/cnpj/12345678901",
+											"host": [
+												"{{http}}{{port}}{{Client}}"
+											],
+											"path": [
+												"cnpj",
+												"12345678901"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetClientId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{http}}{{port}}{{Client}}/id/1",
+											"host": [
+												"{{http}}{{port}}{{Client}}"
+											],
+											"path": [
+												"id",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Posts",
+							"item": [
+								{
+									"name": "RegisterClient",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nameCorporateReason\": \"Test S.A\",\r\n    \"fantasyName\": \"Test\",\r\n    \"cnpj\": \"12345678901\",\r\n    \"contact\": \"55967891234\",\r\n    \"rating\": 5,\r\n    \"establishmentType\": \"Especializado\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{http}}{{port}}{{Client}}",
+											"host": [
+												"{{http}}{{port}}{{Client}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cloud",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "http",
+			"value": "http://localhost:",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "8080",
+			"type": "string"
+		},
+		{
+			"key": "Client",
+			"value": "/client",
+			"type": "string"
+		},
+		{
+			"key": "Account",
+			"value": "/account",
+			"type": "string"
+		}
+	]
+}

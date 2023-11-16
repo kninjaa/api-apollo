@@ -1,12 +1,15 @@
 package apollo.beans;
 
+import apollo.beans.op.EstablishmentType;
+import apollo.repository.Record.RrequestAccount;
+import apollo.repository.Record.RrequestClient;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "tbUser")
+@Table(name = "TBACCOUNT")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,24 +19,32 @@ import java.util.Date;
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", ""})
 public class Account {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "us_int_id")
+    @Column(name = "AC_INT_ID")
     private int id;
 
-    @Column(name = "us_str_login")
+    @Column(name = "AC_STR_LOGIN")
     private String login ;
 
-    @Column(name = "us_str_email")
-    private String email;
+    @Column(name = "AC_STR_EMAILCORP")
+    private String emailCorp;
 
-    @Column(name = "us_str_password")
+    @Column(name = "AC_STR_PASSWORD")
     private String password;
 
-    @Column(name = "us_dat_start")
-    private Date DateStart;
+    @Column(name = "AC_DAT_START")
+    private Date dateStart;
 
-    @Column(name = "us_dat_end")
-    private Date DateEnd;
+    @Column(name = "AC_DAT_END")
+    private Date dateEnd;
 
-    @OneToOne @JoinColumn(name = "ct_int_id", referencedColumnName = "ct_int_id")
+    @OneToOne @JoinColumn(name = "CT_INT_ID", referencedColumnName = "CT_INT_ID")
     private Client client;
+
+    public Account (RrequestAccount rRequestAccount, Client client){
+        this.login = rRequestAccount.login();
+        this.emailCorp = rRequestAccount.emailCorp();
+        this.password = rRequestAccount.password();
+        this.dateStart = rRequestAccount.dateStart();
+        this.client = client;
+    }
 }
