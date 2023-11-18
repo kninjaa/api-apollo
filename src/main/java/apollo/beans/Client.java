@@ -1,5 +1,6 @@
 package apollo.beans;
 
+import apollo.beans.Account.Account;
 import apollo.beans.op.EstablishmentType;
 import apollo.repository.Record.RrequestClient;
 import com.fasterxml.jackson.annotation.*;

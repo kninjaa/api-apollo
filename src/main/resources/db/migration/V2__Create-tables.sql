@@ -31,9 +31,10 @@ CREATE TABLE tbAddress(
 
 CREATE TABLE tbAccount (
     ac_int_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
-    ac_str_login VARCHAR2(255) NOT NULL,
-    ac_str_emailCorp VARCHAR2(255) NOT NULL,
+    ac_str_login VARCHAR2(255) UNIQUE NOT NULL,
+    ac_str_emailCorp VARCHAR2(255) UNIQUE NOT NULL,
     ac_str_password VARCHAR2(4000) NOT NULL,
+    ac_str_role VARCHAR2(255) NOT NULL,
     ac_dat_start TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     ac_dat_end TIMESTAMP,
     ct_int_id INTEGER
@@ -46,10 +47,11 @@ CREATE TABLE tbEquipment (
 );
 
 CREATE TABLE tbOrders(
-    ord_int_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    ord_str_request VARCHAR2(255),
-    ord_dat_requestDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    ct_int_id INTEGER,
-    eq_int_id INTEGER,
-    ord_str_shipping VARCHAR2(255)
+     ord_int_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+     ord_str_request VARCHAR2(255),
+     ord_dat_requestDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+     ct_int_id INTEGER,
+     eq_int_id INTEGER,
+     ad_int_id INTEGER,
+     ord_str_shipping VARCHAR2(255)
 );

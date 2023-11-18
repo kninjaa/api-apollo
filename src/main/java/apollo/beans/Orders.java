@@ -31,6 +31,10 @@ public class Orders {
     @ManyToOne @JoinColumn(name = "EQ_INT_ID")
     private Equipment equipment;
 
+    @JsonManagedReference
+    @OneToOne @JoinColumn(name = "AD_INT_ID", referencedColumnName = "AD_INT_ID")
+    private Address address;
+
     @Column(name = "ORD_STR_SHIPPING")
     private String shipping;
 }

@@ -35,4 +35,7 @@ public class Address {
 
     @ManyToOne @JoinColumn(name = "CT_INT_ID")
     private Client client;
+
+    @OneToOne(mappedBy = "address", fetch = FetchType.EAGER)
+    private Orders orders;
 }

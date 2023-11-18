@@ -15,3 +15,6 @@ ALTER TABLE tbOrders ADD CONSTRAINT ord_fk_client_id
 
 ALTER TABLE tbOrders ADD CONSTRAINT ord_fk_equipment_id
     FOREIGN KEY (eq_int_id) REFERENCES tbEquipment (eq_int_id);
+
+ALTER TABLE tbOrders ADD CONSTRAINT ord_fk_address_id
+    FOREIGN KEY (ad_int_id) REFERENCES tbAddress (ad_int_id);

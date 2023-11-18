@@ -1,11 +1,10 @@
 package apollo.route;
 
-import apollo.beans.Account;
+import apollo.beans.Account.Account;
 import apollo.beans.Client;
 import apollo.repository.Interface.Iaccount;
 import apollo.repository.Interface.Iclient;
 import apollo.repository.Record.RrequestAccount;
-import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +39,14 @@ public class AccountRoute {
         }
     }
 
-    @Transactional
+    /*@Transactional
     @PostMapping
     public ResponseEntity RegisterAccount(@RequestBody @Valid RrequestAccount data){
         String login = data.login();
         String email = data.emailCorp();
         List<Account> existingLogin = iaccount.findByLogin(login);
         List<Account> existingEmail = iaccount.findByEmailCorp(email);
+
         if (!existingLogin.isEmpty() || !existingEmail.isEmpty()){
             String errorMessage = "Já existe ";
             if (existingLogin.stream().anyMatch(client -> client.getLogin().equals(login))) {
@@ -72,5 +72,5 @@ public class AccountRoute {
         }else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado.");
         }
-    }
+    }*/
 }
