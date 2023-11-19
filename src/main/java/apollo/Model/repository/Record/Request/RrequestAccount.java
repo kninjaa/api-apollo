@@ -8,6 +8,5 @@ public record RrequestAccount (
         @NotBlank String emailCorp,
         @NotBlank String password,
         @NotNull Date dateStart,
-        @NotNull String role,
         @NotNull int client
 ){}

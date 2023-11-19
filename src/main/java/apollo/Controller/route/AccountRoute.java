@@ -5,6 +5,8 @@ import apollo.Model.beans.Client;
 import apollo.Model.repository.Interface.Iaccount;
 import apollo.Model.repository.Interface.Iclient;
 import apollo.Model.repository.Record.Request.RrequestAccount;
+import apollo.Model.repository.Record.Response.RresponseAccount;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +36,7 @@ public class AccountRoute {
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Conta não encontrada.");
             }
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado.");
-        }
+        } else throw new EntityNotFoundException();
     }
 
     @Transactional
@@ -69,8 +69,12 @@ public class AccountRoute {
             }else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não esta com o plano ativo.");
             }
-        }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado.");
-        }
+        }else throw new EntityNotFoundException();
+    }
+
+    @Transactional
+    @PutMapping
+    public ResponseEntity UpdataAccount(@RequestBody @Valid RresponseAccount upData){
+        return null;
     }
 }

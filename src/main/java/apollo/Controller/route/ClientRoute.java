@@ -43,7 +43,7 @@ public class ClientRoute {
         if (optionalClientCnpj.isPresent()) {
             Client client = optionalClientCnpj.get();
             return ResponseEntity.ok(client);
-        } else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cnpj não encontrado.");
+        } else throw new EntityNotFoundException();
     }
 
     @Transactional
@@ -53,7 +53,7 @@ public class ClientRoute {
         if (optionalClientId.isPresent()) {
             Client client = optionalClientId.get();
             return ResponseEntity.ok(client);
-        } else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado.");
+        } else throw new EntityNotFoundException();
     }
 
     @Transactional
@@ -115,7 +115,7 @@ public class ClientRoute {
             iclient.save(client);
 
             return ResponseEntity.noContent().build();
-        }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado.");
+        }else throw new EntityNotFoundException();
     }
 
     @Transactional
@@ -134,9 +134,8 @@ public class ClientRoute {
                     iclient.deleteById(String.valueOf(client.getId()));
 
                     return ResponseEntity.ok("Excluido com sucesso!");
-                } else return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                            .body("Para a exclusão do cliente, a conta precisa estar inativa há mais de 1 ano.");
+                } else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Para a exclusão do cliente, a conta precisa estar inativa há mais de 1 ano.");
             }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Para a exclusão do cliente, o plano precisa esta inativo.");
-        }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado.");
+        }else throw new EntityNotFoundException();
     }
 }

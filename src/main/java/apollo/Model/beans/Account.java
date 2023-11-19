@@ -21,16 +21,13 @@ public class Account {
     private int id;
 
     @Column(name = "AC_STR_LOGIN")
-    private String login ;
+    private String login;
 
     @Column(name = "AC_STR_EMAILCORP")
     private String emailCorp;
 
     @Column(name = "AC_STR_PASSWORD")
     private String password;
-
-    @Column(name = "AC_STR_ROLE")
-    private String role;
 
     @Column(name = "AC_DAT_START")
     private Date dateStart;
@@ -45,7 +42,6 @@ public class Account {
         this.login = rRequestAccount.login();
         this.emailCorp = rRequestAccount.emailCorp();
         this.password = rRequestAccount.password();
-        this.role = rRequestAccount.role();
         this.dateStart = rRequestAccount.dateStart();
         this.client = client;
     }
