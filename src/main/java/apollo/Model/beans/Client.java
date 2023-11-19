@@ -1,7 +1,8 @@
 package apollo.Model.beans;
 
 import apollo.Model.beans.op.EstablishmentType;
-import apollo.Model.repository.Record.RrequestClient;
+import apollo.Model.repository.Record.Request.RrequestClient;
+import apollo.Model.repository.Record.Response.RresponseClient;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
@@ -60,5 +61,17 @@ public class Client {
         this.contact = rRequestClient.contact();
         this.rating = rRequestClient.rating();
         this.establishmentType = new EstablishmentType();
+    }
+
+    public Client UpClient (RresponseClient rResponseClient){
+        Client clientUp = new Client();
+        this.situation = rResponseClient.situation();
+        if (rResponseClient.nameCorporateReason() != null) this.nameCorporateReason = rResponseClient.nameCorporateReason();
+        if (rResponseClient.fantasyName() != null) this.fantasyName = rResponseClient.fantasyName();
+        if (rResponseClient.cnpj() != null) this.cnpj = rResponseClient.cnpj();
+        if (rResponseClient.contact() != null) this.contact = rResponseClient.contact();
+        if (rResponseClient.rating() != null) this.rating = rResponseClient.rating();
+
+        return clientUp;
     }
 }

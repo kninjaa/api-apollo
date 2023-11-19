@@ -1,6 +1,6 @@
 package apollo.Model.beans;
 
-import apollo.Model.repository.Record.RrequestAccount;
+import apollo.Model.repository.Record.Request.RrequestAccount;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
@@ -45,6 +45,7 @@ public class Account {
         this.login = rRequestAccount.login();
         this.emailCorp = rRequestAccount.emailCorp();
         this.password = rRequestAccount.password();
+        this.role = rRequestAccount.role();
         this.dateStart = rRequestAccount.dateStart();
         this.client = client;
     }

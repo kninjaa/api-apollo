@@ -1,10 +1,10 @@
-package apollo.Resource.route;
+package apollo.Controller.route;
 
 import apollo.Model.beans.Account;
 import apollo.Model.beans.Client;
 import apollo.Model.repository.Interface.Iaccount;
 import apollo.Model.repository.Interface.Iclient;
-import apollo.Model.repository.Record.RrequestAccount;
+import apollo.Model.repository.Record.Request.RrequestAccount;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

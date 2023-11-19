@@ -1,4 +1,4 @@
-package apollo.Model.repository.Record;
+package apollo.Model.repository.Record.Request;
 
 import jakarta.validation.constraints.*;
 import java.util.Date;
@@ -8,5 +8,6 @@ public record RrequestAccount (
         @NotBlank String emailCorp,
         @NotBlank String password,
         @NotNull Date dateStart,
+        @NotNull String role,
         @NotNull int client
 ){}

@@ -1,4 +1,4 @@
-package apollo.Model.repository.Record;
+package apollo.Model.repository.Record.Request;
 
 import jakarta.validation.constraints.*;
 
