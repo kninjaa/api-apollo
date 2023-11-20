@@ -1,8 +1,10 @@
 package apollo.Model.beans;
 
+import apollo.Model.repository.Record.Request.RrequestOrders;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
+import org.aspectj.weaver.ast.Or;
 
 import java.util.Date;
 
@@ -37,4 +39,12 @@ public class Orders {
 
     @Column(name = "ORD_STR_SHIPPING")
     private String shipping;
+
+    public Orders(RrequestOrders rRequestOrders, Client client){
+        this.request = rRequestOrders.request();
+        this.requestDate = rRequestOrders.requestDate();
+        this.client = client;
+        this.equipment = new Equipment();
+        this.shipping = rRequestOrders.shipping();
+    }
 }

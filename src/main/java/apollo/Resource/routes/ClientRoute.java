@@ -1,6 +1,6 @@
-package apollo.Controller.route;
+package apollo.Resource.routes;
 
-import apollo.Controller.bo.TempDelete;
+import apollo.Controller.bo.validation;
 import apollo.Model.beans.Account;
 import apollo.Model.beans.Client;
 import apollo.Model.beans.op.EstablishmentType;
@@ -126,8 +126,8 @@ public class ClientRoute {
             Client client = optionalClient.get();
             if (!client.isSituation()){
                 Account clientAccount = client.getAccount();
-                TempDelete tempDelete = new TempDelete();
-                boolean isInactive = tempDelete.isInactiveAfterOneYear(clientAccount);
+                validation validation = new validation();
+                boolean isInactive = validation.isInactiveAfterOneYear(clientAccount);
 
                 if (isInactive) {
                     iaccount.delete(clientAccount);

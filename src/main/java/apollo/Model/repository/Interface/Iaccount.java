@@ -9,4 +9,5 @@ public interface Iaccount extends JpaRepository<Account, String> {
     Optional<Account> findByLogin(String login);
     Optional<Account> findByClient(Client client);
     Optional<Account> findByEmailCorp(String emailCorp);
+    Optional<Account> findByPassword(String password);
 }

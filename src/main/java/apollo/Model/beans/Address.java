@@ -1,5 +1,7 @@
 package apollo.Model.beans;
 
+import apollo.Model.repository.Record.Request.RresquestAddress;
+import apollo.Model.repository.Record.Response.RresponseAddress;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", ""})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "orders"})
 public class Address {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "AD_INT_ID")
@@ -36,6 +38,27 @@ public class Address {
     @ManyToOne @JoinColumn(name = "CT_INT_ID")
     private Client client;
 
+    @JsonIgnoreProperties
     @OneToOne(mappedBy = "address", fetch = FetchType.EAGER)
     private Orders orders;
+
+    public Address (RresquestAddress rResquestAddress, Client client){
+        this.street = rResquestAddress.street();
+        this.number = rResquestAddress.number();
+        this.complement = rResquestAddress.complement();
+        this.city = rResquestAddress.city();
+        this.cep = rResquestAddress.cep();
+        this.client = client;
+    }
+
+    public Address UpAddress(RresponseAddress rResponseAddress){
+        Address address = new Address();
+        if (rResponseAddress.street() != null) this.street = rResponseAddress.street();
+        if (rResponseAddress.number() > -1) this.number = rResponseAddress.number();
+        if (rResponseAddress.complement() != null) this.complement = rResponseAddress.complement();
+        if (rResponseAddress.city() != null) this.city = rResponseAddress.city();
+        if (rResponseAddress.cep() != null) this.cep = rResponseAddress.cep();
+
+        return address;
+    }
 }

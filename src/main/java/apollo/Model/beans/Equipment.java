@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "orders"})
 public class Equipment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EQ_INT_ID")
