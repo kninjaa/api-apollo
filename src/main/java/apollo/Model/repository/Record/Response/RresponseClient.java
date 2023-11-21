@@ -6,9 +6,7 @@ import jakarta.validation.constraints.NotNull;
 public record RresponseClient(
         int id,
         @NotNull boolean situation,
-        String nameCorporateReason,
         String fantasyName,
-        String cnpj,
         String contact,
         Float rating
 ) {
@@ -16,9 +14,7 @@ public record RresponseClient(
         this(
                 client.getId(),
                 client.isSituation(),
-                client.getNameCorporateReason(),
                 client.getFantasyName(),
-                client.getCnpj(),
                 client.getContact(),
                 client.getRating()
         );

@@ -1,14 +1,13 @@
 package apollo.Resource.routes;
 
 
-import apollo.Model.beans.Account;
-import apollo.Model.beans.Client;
-import apollo.Model.beans.Equipment;
-import apollo.Model.beans.Orders;
+import apollo.Model.beans.*;
+import apollo.Model.repository.Interface.Iaddress;
 import apollo.Model.repository.Interface.Iclient;
 import apollo.Model.repository.Interface.Iequipment;
 import apollo.Model.repository.Interface.Iorders;
 import apollo.Model.repository.Record.Request.RrequestOrders;
+import apollo.Model.repository.Record.Response.RresponseOrders;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -29,6 +28,11 @@ public class OrdersRoute {
 
     @Autowired
     private Iequipment iequipment;
+
+    @Autowired
+    private Iaddress iaddress;
+    private Equipment equipment;
+    private Address address;
 
     @Transactional
     @GetMapping
@@ -61,10 +65,37 @@ public class OrdersRoute {
         if(!optionalEquipment.isPresent()) throw new EntityNotFoundException();
         Equipment equipment = optionalEquipment.get();
 
-        Orders newOrders = new Orders(data, client);
+        Optional<Address> optionalAddress = iaddress.findById(String.valueOf(data.address()));
+        if(!optionalAddress.isPresent()) throw new EntityNotFoundException();
+        Address address = optionalAddress.get();
+
+        Orders newOrders = new Orders(data, client, equipment, address);
         newOrders.setEquipment(equipment);
+        newOrders.setAddress(address);
         iorders.save(newOrders);
 
         return ResponseEntity.ok().build();
+    }
+
+    @Transactional
+    @PutMapping
+    public ResponseEntity UpdataAccount(@RequestBody @Valid RresponseOrders upData){
+        Optional<Orders> optionalOrders = iorders.findById(String.valueOf(upData.id()));
+        if (!optionalOrders.isPresent()) throw new EntityNotFoundException();
+
+        if(upData.equipment() != 0){
+            Optional<Equipment> optionalEquipment = iequipment.findById(String.valueOf(upData.equipment()));
+            equipment = optionalEquipment.get();
+        }
+        if(upData.address() != 0){
+            Optional<Address> optionalAddress = iaddress.findById(String.valueOf(upData.address()));
+            address = optionalAddress.get();
+        }
+
+        Orders upOrders = optionalOrders.get();
+        upOrders.setShipping(upData.shipping());
+        upOrders.UpOrders(upData, equipment, address);
+
+        return ResponseEntity.ok(upOrders);
     }
 }

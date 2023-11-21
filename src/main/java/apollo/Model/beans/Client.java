@@ -66,9 +66,7 @@ public class Client {
     public Client UpClient (RresponseClient rResponseClient){
         Client clientUp = new Client();
         this.situation = rResponseClient.situation();
-        if (rResponseClient.nameCorporateReason() != null) this.nameCorporateReason = rResponseClient.nameCorporateReason();
         if (rResponseClient.fantasyName() != null) this.fantasyName = rResponseClient.fantasyName();
-        if (rResponseClient.cnpj() != null) this.cnpj = rResponseClient.cnpj();
         if (rResponseClient.contact() != null) this.contact = rResponseClient.contact();
         if (rResponseClient.rating() != null) this.rating = rResponseClient.rating();
 

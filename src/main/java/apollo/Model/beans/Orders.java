@@ -1,6 +1,7 @@
 package apollo.Model.beans;
 
 import apollo.Model.repository.Record.Request.RrequestOrders;
+import apollo.Model.repository.Record.Response.RresponseOrders;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
@@ -40,11 +41,21 @@ public class Orders {
     @Column(name = "ORD_STR_SHIPPING")
     private String shipping;
 
-    public Orders(RrequestOrders rRequestOrders, Client client){
+    public Orders(RrequestOrders rRequestOrders, Client client, Equipment equipment, Address address){
         this.request = rRequestOrders.request();
         this.requestDate = rRequestOrders.requestDate();
         this.client = client;
-        this.equipment = new Equipment();
+        this.equipment = equipment;
+        this.address = address;
         this.shipping = rRequestOrders.shipping();
+    }
+
+    public Orders UpOrders(RresponseOrders rResponseOrders, Equipment equipment, Address address){
+        Orders orders = new Orders();
+        this.equipment = equipment;
+        this.address = address;
+        if(rResponseOrders.shipping() != null) this.shipping = rResponseOrders.shipping();
+
+        return orders;
     }
 }

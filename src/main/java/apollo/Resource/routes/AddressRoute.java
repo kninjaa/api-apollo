@@ -41,11 +41,7 @@ public class AddressRoute {
     @Transactional
     @PostMapping
     public ResponseEntity RegisterAddress(@RequestBody @Valid RresquestAddress data){
-        Optional<Address> optionalAddress = iaddress.findById(String.valueOf(data.client()));
-        if (!optionalAddress.isPresent()) throw new EntityNotFoundException();
-        Address PostAddressClient =  optionalAddress.get();
-
-        Optional<Client> optionalClient = iclient.findById(String.valueOf(PostAddressClient.getClient().getId()));
+        Optional<Client> optionalClient = iclient.findById(String.valueOf(data.client()));
         if (optionalClient.isPresent()){
             Client client = optionalClient.get();
             if (!client.isSituation()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Conta inativa.");

@@ -2,11 +2,11 @@ package apollo.Resource.routes;
 
 import apollo.Controller.bo.validation;
 import apollo.Model.beans.Account;
+import apollo.Model.beans.Address;
 import apollo.Model.beans.Client;
+import apollo.Model.beans.Orders;
 import apollo.Model.beans.op.EstablishmentType;
-import apollo.Model.repository.Interface.Iaccount;
-import apollo.Model.repository.Interface.Iclient;
-import apollo.Model.repository.Interface.IiestablishmentType;
+import apollo.Model.repository.Interface.*;
 import apollo.Model.repository.Record.Request.RrequestClient;
 import apollo.Model.repository.Record.Response.RresponseClient;
 import jakarta.persistence.EntityNotFoundException;
@@ -27,7 +27,13 @@ public class ClientRoute {
     private Iaccount iaccount;
 
     @Autowired
+    private Iaddress iaddress;
+
+    @Autowired
     private IiestablishmentType iestablishmentType;
+
+    @Autowired
+    private Iorders iorders;
 
     @Transactional
     @GetMapping
@@ -47,7 +53,7 @@ public class ClientRoute {
     }
 
     @Transactional
-    @GetMapping("/id/{id}")
+    @GetMapping("/idClient/{id}")
     public ResponseEntity GetClientId(@PathVariable int id) {
         Optional<Client> optionalClientId = iclient.findById(String.valueOf(id));
         if (optionalClientId.isPresent()) {
@@ -79,7 +85,7 @@ public class ClientRoute {
                 Client newClient = new Client(data);
                 newClient.setEstablishmentType(establishmentType);
                 iclient.save(newClient);
-                return ResponseEntity.ok().build();
+                return ResponseEntity.ok("Registrado com sucesso!");
             }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cnpj invalido.");
         }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tipo do estabelecimento não especificado.");
     }
@@ -91,11 +97,7 @@ public class ClientRoute {
         if (OptionalClient.isPresent()) {
             Client UpClient = OptionalClient.get();
             if (UpClient.isSituation()){
-                if(upData.cnpj() == null || upData.cnpj().isEmpty()) UpClient.UpClient(upData);
-                else {
-                    if(upData.cnpj().length() == 14) UpClient.UpClient(upData);
-                    else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cnpj invalido.");
-                }
+                UpClient.UpClient(upData);
                 return ResponseEntity.ok(UpClient);
             }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente inativo.");
         } else throw new EntityNotFoundException();
@@ -114,7 +116,7 @@ public class ClientRoute {
             client.setSituation(false);
             iclient.save(client);
 
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok("Conta desativada!");
         }else throw new EntityNotFoundException();
     }
 
@@ -126,10 +128,14 @@ public class ClientRoute {
             Client client = optionalClient.get();
             if (!client.isSituation()){
                 Account clientAccount = client.getAccount();
+                List<Orders> clientOrders = client.getOrders();
+                List<Address> clientAddress = client.getAddresses();
                 validation validation = new validation();
                 boolean isInactive = validation.isInactiveAfterOneYear(clientAccount);
 
                 if (isInactive) {
+                    iorders.deleteAll(clientOrders);
+                    iaddress.deleteAll(clientAddress);
                     iaccount.delete(clientAccount);
                     iclient.deleteById(String.valueOf(client.getId()));
 
