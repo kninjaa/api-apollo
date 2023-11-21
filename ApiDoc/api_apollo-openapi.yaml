@@ -1,0 +1,493 @@
+openapi: "3.0.3"
+info:
+  title: "api_apollo API"
+  description: "api_apollo API"
+  version: "1.0.0"
+servers:
+  - url: "https://api-apollo.onrender.com"
+paths:
+  /client/{cnpj}:
+    put:
+      summary: "PUT client/{cnpj}"
+      operationId: "UpdataClient"
+      parameters:
+        - name: "cnpj"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RresponseClient"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /client:
+    post:
+      summary: "POST client"
+      operationId: "RegisterClient"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RrequestClient"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    get:
+      summary: "GET client"
+      operationId: "GetClient"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /client/cnpj/{cnpj}:
+    delete:
+      summary: "DELETE client/cnpj/{cnpj}"
+      operationId: "DelClientCnpj"
+      parameters:
+        - name: "cnpj"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    get:
+      summary: "GET client/cnpj/{cnpj}"
+      operationId: "GetClientCnpj"
+      parameters:
+        - name: "cnpj"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /client/id/{id}:
+    delete:
+      summary: "DELETE client/id/{id}"
+      operationId: "DelClient"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /client/idClient/{id}:
+    get:
+      summary: "GET client/idClient/{id}"
+      operationId: "GetClientId"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /account/{login}:
+    put:
+      summary: "PUT account/{login}"
+      operationId: "UpdataAccount"
+      parameters:
+        - name: "login"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RresponseAccount"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /account:
+    post:
+      summary: "POST account"
+      operationId: "RegisterAccount"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RrequestAccount"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /account/{client}:
+    get:
+      summary: "GET account/{client}"
+      operationId: "GetAccount"
+      parameters:
+        - name: "client"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /address/{id}:
+    put:
+      summary: "PUT address/{id}"
+      operationId: "UpdataAddress"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RresponseAddress"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /address:
+    post:
+      summary: "POST address"
+      operationId: "RegisterAddress"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RresquestAddress"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    get:
+      summary: "GET address"
+      operationId: "GetAddress"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /address/{client}:
+    get:
+      summary: "GET address/{client}"
+      operationId: "GetAddressClient"
+      parameters:
+        - name: "client"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /equipment:
+    get:
+      summary: "GET equipment"
+      operationId: "GetEquipment"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /equipment/{id}:
+    get:
+      summary: "GET equipment/{id}"
+      operationId: "GetEquipmentId"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /orders/{id}:
+    put:
+      summary: "PUT orders/{id}"
+      operationId: "UpdataOrders"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RresponseOrders"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+
+    get:
+      summary: "GET orders/{id}"
+      operationId: "GetOrdersId"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /orders:
+    post:
+      summary: "POST orders"
+      operationId: "RegisterOrders"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RrequestOrders"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    get:
+      summary: "GET orders"
+      operationId: "GetOrders"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+components:
+  schemas:
+    RresponseClient:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        situation:
+          type: "boolean"
+        fantasyName:
+          type: "string"
+        contact:
+          type: "string"
+        rating:
+          type: "number"
+          format: "float"
+    HttpHeaders:
+      type: "object"
+      properties: { }
+    ResponseEntity:
+      type: "object"
+      properties:
+        headers:
+          $ref: "#/components/schemas/HttpHeaders"
+    RrequestClient:
+      type: "object"
+      properties:
+        nameCorporateReason:
+          type: "string"
+        fantasyName:
+          type: "string"
+        cnpj:
+          type: "string"
+        contact:
+          type: "string"
+        rating:
+          type: "number"
+          format: "float"
+        establishmentType:
+          type: "string"
+    RresponseAccount:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        client:
+          type: "integer"
+          format: "int32"
+        login:
+          type: "string"
+        emailCorp:
+          type: "string"
+        password:
+          type: "string"
+    RrequestAccount:
+      type: "object"
+      properties:
+        login:
+          type: "string"
+        emailCorp:
+          type: "string"
+        password:
+          type: "string"
+        dateStart:
+          type: "string"
+          format: "date-time"
+        client:
+          type: "integer"
+          format: "int32"
+    RresponseAddress:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        client:
+          type: "integer"
+          format: "int32"
+        street:
+          type: "string"
+        number:
+          type: "integer"
+          format: "int32"
+        complement:
+          type: "string"
+        city:
+          type: "string"
+        cep:
+          type: "string"
+    RresquestAddress:
+      type: "object"
+      properties:
+        street:
+          type: "string"
+        number:
+          type: "integer"
+          format: "int32"
+        complement:
+          type: "string"
+        city:
+          type: "string"
+        cep:
+          type: "string"
+        client:
+          type: "integer"
+          format: "int32"
+    RresponseOrders:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        equipment:
+          type: "integer"
+          format: "int32"
+        address:
+          type: "integer"
+          format: "int32"
+        shipping:
+          type: "string"
+    RrequestOrders:
+      type: "object"
+      properties:
+        request:
+          type: "string"
+        requestDate:
+          type: "string"
+          format: "date-time"
+        client:
+          type: "integer"
+          format: "int32"
+        equipment:
+          type: "integer"
+          format: "int32"
+        address:
+          type: "integer"
+          format: "int32"
+        shipping:
+          type: "string"

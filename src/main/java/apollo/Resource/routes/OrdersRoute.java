@@ -77,7 +77,7 @@ public class OrdersRoute {
 
     @Transactional
     @PutMapping("/{id}")
-    public ResponseEntity UpdataAccount(@RequestBody @Valid RresponseOrders upData){
+    public ResponseEntity UpdataOrders(@RequestBody @Valid RresponseOrders upData){
         Optional<Orders> optionalOrders = iorders.findById(String.valueOf(upData.id()));
         if (!optionalOrders.isPresent()) throw new EntityNotFoundException();
 
