@@ -48,7 +48,7 @@ public class AddressRoute {
             Address newAddress = new Address(data, client);
             iaddress.save(newAddress);
 
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok("Endereço cadastrado.");
         }else throw new EntityNotFoundException();
     }
 
@@ -71,25 +71,4 @@ public class AddressRoute {
         return ResponseEntity.ok("Atualizado com sucesso!");
     }
 
-
-    @Transactional
-    @DeleteMapping("/{id}")
-    public ResponseEntity DelAddress(@PathVariable int id){
-        Optional<Address> optionalAddress = iaddress.findById(String.valueOf(id));
-        if(!optionalAddress.isPresent()) throw new EntityNotFoundException();
-        Address DelAddress = optionalAddress.get();
-
-        Optional<Client> optionalClient = iclient.findById(String.valueOf(DelAddress.getClient().getId()));
-        if (optionalClient.isPresent()) {
-            Client DelClientAd = optionalClient.get();
-            if (!DelClientAd.isSituation())
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Para exclusão de endereços, o plano do cliente precisa esta inativo.");
-            else{
-                iaddress.deleteById(String.valueOf(id));
-                return ResponseEntity.ok("Excluido com sucesso!");
-            }
-        }else {
-            throw new EntityNotFoundException();
-        }
-    }
 }

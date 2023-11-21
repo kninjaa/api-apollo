@@ -67,7 +67,7 @@ public class AccountRoute {
                 Account newAccount = new Account(data, client);
                 iaccount.save(newAccount);
 
-                return ResponseEntity.ok().build();
+                return ResponseEntity.ok("Conta cadastrada.");
             }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não esta com o plano ativo.");
         }else throw new EntityNotFoundException();
     }
@@ -75,32 +75,23 @@ public class AccountRoute {
     @Transactional
     @PutMapping("/{login}")
     public ResponseEntity UpdataAccount(@RequestBody @Valid RresponseAccount upData){
-        Optional<Account> optionalAccount = iaccount.findByLogin(upData.login());
-
-        if (optionalAccount.isEmpty() || !optionalAccount.stream().anyMatch(client -> client.getLogin().equals(upData.login()))) {
-            String errorMessage = "Não pode alterar o login.";
-            errorMessage = errorMessage.substring(0, errorMessage.length() - 2);
-
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
-        }
+        Optional<Account> optionalAccount = iaccount.findById(String.valueOf(upData.id()));
 
         if (optionalAccount.isPresent()){
             String email = upData.emailCorp();
             String password = upData.password();
             validation validation = new validation();
-            Optional<Account> existingEmail = iaccount.findByEmailCorp(email);
-            Optional<Account> existingPassword = iaccount.findByPassword(password);
             Optional<Client> optionalClient = iclient.findById(String.valueOf(upData.client()));
 
-            if (!validation.isValidEmail(email) || !existingEmail.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email inválido");
-            if (!validation.validatePassword(password) || !existingPassword.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A senha deve ter pelo menos 8 caracteres e conter caracteres especiais.");
+            if (!validation.isValidEmail(email)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email inválido");
+            if (!validation.validatePassword(password)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A senha deve ter pelo menos 8 caracteres e conter caracteres especiais.");
 
             Client client = optionalClient.get();
             if (client.isSituation()){
                 Account accountUp = optionalAccount.get();
                 accountUp.UpAccount(upData);
 
-                return ResponseEntity.ok().build();
+                return ResponseEntity.ok("Conta atualizada.");
             }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não esta com o plano ativo.");
         }else throw new EntityNotFoundException();
     }

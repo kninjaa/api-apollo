@@ -37,10 +37,8 @@ public class OrdersRoute {
     @Transactional
     @GetMapping
     public ResponseEntity GetOrders() {
-        List<Orders> equipmentList = iorders.findAll();
-        if (equipmentList == null || equipmentList.isEmpty()) throw new EntityNotFoundException();
-
-        return ResponseEntity.ok(equipmentList);
+        var equipment = iorders.findAll();
+        return ResponseEntity.ok(equipment);
     }
 
     @Transactional
@@ -78,7 +76,7 @@ public class OrdersRoute {
     }
 
     @Transactional
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity UpdataAccount(@RequestBody @Valid RresponseOrders upData){
         Optional<Orders> optionalOrders = iorders.findById(String.valueOf(upData.id()));
         if (!optionalOrders.isPresent()) throw new EntityNotFoundException();

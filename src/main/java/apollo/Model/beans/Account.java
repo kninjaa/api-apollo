@@ -2,7 +2,6 @@ package apollo.Model.beans;
 
 import apollo.Model.repository.Record.Request.RrequestAccount;
 import apollo.Model.repository.Record.Response.RresponseAccount;
-import apollo.Model.repository.Record.Response.RresponseClient;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,7 +15,6 @@ import java.util.*;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", ""})
 public class Account {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "AC_INT_ID")
@@ -50,7 +48,6 @@ public class Account {
 
     public Account UpAccount (RresponseAccount rResponseAccount){
         Account accountUp  = new Account();
-        if (rResponseAccount.login() != null) this.login = rResponseAccount.login();
         if (rResponseAccount.emailCorp() != null) this.emailCorp = rResponseAccount.emailCorp();
         if (rResponseAccount.password() != null) this.password = rResponseAccount.password();
 
