@@ -1,6 +1,6 @@
 package apollo.Resource.routes;
 
-import apollo.Controller.bo.validation;
+import apollo.Model.bo.validation;
 import apollo.Model.beans.Account;
 import apollo.Model.beans.Client;
 import apollo.Model.repository.Interface.Iaccount;
@@ -39,6 +39,17 @@ public class AccountRoute {
     }
 
     @Transactional
+    @GetMapping("/login/{login}")
+    public ResponseEntity GetAccountLogin(@PathVariable String login) {
+        Optional<Account> optionalAccount= iaccount.findByLogin(login);
+        if (!optionalAccount.isPresent()) throw new EntityNotFoundException();
+        Account account = optionalAccount.get();
+
+        return ResponseEntity.ok(account);
+         //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Conta não esta ativa.");0
+    }
+
+    @Transactional
     @PostMapping
     public ResponseEntity RegisterAccount(@RequestBody @Valid RrequestAccount data){
         String login = data.login();
@@ -67,7 +78,7 @@ public class AccountRoute {
                 Account newAccount = new Account(data, client);
                 iaccount.save(newAccount);
 
-                return ResponseEntity.ok("Conta cadastrada.");
+                return ResponseEntity.ok(newAccount);
             }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não esta com o plano ativo.");
         }else throw new EntityNotFoundException();
     }

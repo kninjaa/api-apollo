@@ -72,7 +72,7 @@ public class OrdersRoute {
         newOrders.setAddress(address);
         iorders.save(newOrders);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(newOrders);
     }
 
     @Transactional

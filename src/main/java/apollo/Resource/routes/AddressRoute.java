@@ -48,7 +48,7 @@ public class AddressRoute {
             Address newAddress = new Address(data, client);
             iaddress.save(newAddress);
 
-            return ResponseEntity.ok("Endereço cadastrado.");
+            return ResponseEntity.ok(newAddress);
         }else throw new EntityNotFoundException();
     }
 

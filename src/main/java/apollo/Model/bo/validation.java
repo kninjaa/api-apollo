@@ -1,4 +1,4 @@
-package apollo.Controller.bo;
+package apollo.Model.bo;
 
 import apollo.Model.beans.Account;
 import java.util.*;

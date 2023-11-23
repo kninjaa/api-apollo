@@ -1,6 +1,6 @@
 package apollo.Resource.routes;
 
-import apollo.Controller.bo.validation;
+import apollo.Model.bo.validation;
 import apollo.Model.beans.Account;
 import apollo.Model.beans.Address;
 import apollo.Model.beans.Client;
@@ -85,7 +85,8 @@ public class ClientRoute {
                 Client newClient = new Client(data);
                 newClient.setEstablishmentType(establishmentType);
                 iclient.save(newClient);
-                return ResponseEntity.ok("Registrado com sucesso!");
+
+                return ResponseEntity.ok(newClient);
             }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cnpj invalido.");
         }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tipo do estabelecimento não especificado.");
     }
@@ -116,7 +117,7 @@ public class ClientRoute {
             client.setSituation(false);
             iclient.save(client);
 
-            return ResponseEntity.ok("Conta desativada!");
+            return ResponseEntity.ok(client);
         }else throw new EntityNotFoundException();
     }
 
