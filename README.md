@@ -13,5 +13,5 @@
 
 
 ### Videos
-* [Pitch]()
+* [Pitch](https://youtu.be/Xa0jfndr1dc)
 * [Demonstração do software](https://youtu.be/boKUBEPXKGc)
